@@ -5,7 +5,6 @@ An app that allows one to build a burger and checkout that order of that burger.
 This is still a work in progress as it requires routing and server access
 
 ![](src/assets/images/1.png)
-![](src/assets/images/2.png)
 ![](src/assets/images/3.png)
 
 ## How to Use:
