@@ -22,7 +22,7 @@ class BurgerBuilder extends Component {
             ingredients: {salad: 0, bacon: 0, cheese: 0, meat: 0},
             totalPrice: 4,
             purchasable: 0,
-            purcashing: false,
+            purchasing: false,
             loading: false 
         }
       
@@ -77,7 +77,7 @@ class BurgerBuilder extends Component {
     }
 
     purchaseCancelHandler = () => {
-        this.setState({loading: false})
+        this.setState({purchasing: false})
     }
 
     purchaseContinuedHanlder = () => {
