@@ -30,6 +30,7 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount(){
+        console.log(this.props)
         axios.get('https://react-my-burger-b66dd.firebaseio.com/ingredients .json')
         .then(response => {
             const startingredients = response.data
@@ -91,29 +92,30 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinuedHanlder = () => {
-    this.setState({loading: true})
-        const orders = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice, 
-            customer: {
-                name: 'Dania',
-                address: {
-                    street: 'Testing street',
-                    zipCode: '12314',
-                    country: 'Malaysia'
-                },
-                email: 'test@test.com',
-                deliveryMethod: 'fastet'
-            }
-        }
-        axios.post('/orders.json', orders)
-        .then(response => {
-            this.setState({loading: false, purchasing: false})
-        })
-        .catch(error => {
-            this.setState({loading: false, purchasing: false})
-            console.log(error)
-        })
+    // this.setState({loading: true})
+    //     const orders = {
+    //         ingredients: this.state.ingredients,
+    //         price: this.state.totalPrice, 
+    //         customer: {
+    //             name: 'Dania',
+    //             address: {
+    //                 street: 'Testing street',
+    //                 zipCode: '12314',
+    //                 country: 'Malaysia'
+    //             },
+    //             email: 'test@test.com',
+    //             deliveryMethod: 'fastet'
+    //         }
+    //     }
+    //     axios.post('/orders.json', orders)
+    //     .then(response => {
+    //         this.setState({loading: false, purchasing: false})
+    //     })
+    //     .catch(error => {
+    //         this.setState({loading: false, purchasing: false})
+    //         console.log(error)
+    //     })
+        this.props.history.push('/checkout')
     }
 
     render(){
