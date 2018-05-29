@@ -8,11 +8,12 @@ import ContactData from './ContactData/ContactData'
 class Checkout extends Component {
     state = {
         ingredients: null, 
-        price: 0 
+        totalPrice: 0 
     }
 
     componentWillMount(){
         const query = new URLSearchParams(this.props.location.search)
+
         const ingredients = {};
         let price = 0 
         for (let param of query.entries()){
@@ -45,7 +46,7 @@ class Checkout extends Component {
                 <Route path={this.props.match.path + '/contact-data'} 
                        render={(props) => (<ContactData 
                                         ingredients={this.state.ingredients}
-                                        price={this.state.totalPrice}
+                                        price={+this.state.totalPrice}
                                         {...props}
                                         />)} />
             </div> 
