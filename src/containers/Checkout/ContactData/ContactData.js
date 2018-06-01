@@ -85,7 +85,10 @@ class ContactData extends Component {
                             {value: 'cheapest', display: 'cheapest'}
                     ],
             },
-            value: ''
+            value: '',
+            validation: {
+                required: true, 
+            },
             }
         },
     formIsValid: false, 
@@ -143,10 +146,14 @@ class ContactData extends Component {
         }
         updatedFormElement.value = event.target.value 
         updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
-        updatedOrderForm[inputIdentifier] = updatedFormElement
         updatedFormElement.touched = true; 
-        
-        this.setState({orderform: updatedOrderForm})
+        updatedOrderForm[inputIdentifier] = updatedFormElement
+
+        let formIsValid = true;
+        for (let inputIdentifier in updatedOrderForm) {
+            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid 
+        }
+        this.setState({orderform: updatedOrderForm, formIsValid: formIsValid})
     }
 
 
@@ -165,15 +172,14 @@ class ContactData extends Component {
             <form onSubmit={this.orderHandler}> 
                 {formElementsArray.map(formElement => (
                     <Input 
-                           key={formElement.id}
-                           elementType={formElement.config.elementType}  
-                           elementConfig={formElement.config.elementConfig} 
-                           value={formElement.config.value} 
-                           changed={(event) => this.inputChangedHandler(event, formElement.id)}
-                           invalid={!formElement.config.valid}
-                           shouldValidate={formElement.config.validation}
-                           touched={formElement.config.touched}
-                           /> 
+                    key={formElement.id}
+                    elementType={formElement.config.elementType}
+                    elementConfig={formElement.config.elementConfig}
+                    value={formElement.config.value}
+                    invalid={!formElement.config.valid}
+                    shouldValidate={formElement.config.validation}
+                    touched={formElement.config.touched}
+                    changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
                 <Button btnType="Success" clicked={this.orderHandler}> Order </Button> 
             </form> 
